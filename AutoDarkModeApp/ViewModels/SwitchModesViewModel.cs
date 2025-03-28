@@ -107,7 +107,7 @@ public partial class SwitchModesViewModel : ObservableRecipient
         IsAutoSwitchNotify = _builder.Config.AutoSwitchNotify.Enabled;
         AutoSwitchNotifyGracePeriodMinutes = _builder.Config.AutoSwitchNotify.GracePeriodMinutes;
         IsHotkeysEnabled = _builder.Config.Hotkeys.Enabled;
-        IsSettingsCardEnabled = !IsHotkeysEnabled;
+        IsSettingsCardEnabled = IsHotkeysEnabled; // TODO: give this a better name
         IsBatteryDarkMode = _builder.Config.Events.DarkThemeOnBattery;
         HotkeyForceLight = _builder.Config.Hotkeys.ForceLight;
         HotkeyForceDark = _builder.Config.Hotkeys.ForceDark;
