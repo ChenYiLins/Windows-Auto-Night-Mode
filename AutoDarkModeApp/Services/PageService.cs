@@ -22,7 +22,6 @@ public class PageService : IPageService
         Configure<DonationViewModel, DonationPage>();
         Configure<AboutViewModel, AboutPage>();
         Configure<SettingsViewModel, SettingsPage>();
-        Configure<WallpaperPickerViewModel, WallpaperPickerPage>();
     }
 
     public Type GetPageType(string key)

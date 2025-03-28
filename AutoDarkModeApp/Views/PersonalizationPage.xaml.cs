@@ -1,5 +1,4 @@
-﻿using AutoDarkModeApp.Contracts.Services;
-using AutoDarkModeApp.ViewModels;
+﻿using AutoDarkModeApp.ViewModels;
 
 using Microsoft.UI.Xaml.Controls;
 
@@ -16,14 +15,5 @@ public sealed partial class PersonalizationPage : Page
     {
         ViewModel = App.GetService<PersonalizationViewModel>();
         InitializeComponent();
-    }
-
-    private void PickWallpaperSettingsCard_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
-    {
-        var navigation = App.GetService<INavigationService>();
-        if (navigation?.Frame != null)
-        {
-            navigation.NavigateTo(typeof(WallpaperPickerViewModel).FullName!);
-        }
     }
 }
