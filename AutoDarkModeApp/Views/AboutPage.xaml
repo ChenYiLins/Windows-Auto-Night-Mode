@@ -57,7 +57,7 @@
                 <TextBlock Style="{StaticResource SettingsSectionHeaderTextBlockStyle}" Text="{helpers:ResourceString Name=SpecialThanks}" />
 
                 <StackPanel Spacing="8">
-                    <HyperlinkButton NavigateUri="https://github.com/namazso">namaszo</HyperlinkButton>
+                    <HyperlinkButton NavigateUri="https://github.com/namazso" ToolTipService.ToolTip="https://github.com/namazso">namaszo</HyperlinkButton>
                 </StackPanel>
 
                 <TextBlock Style="{StaticResource SettingsSectionHeaderTextBlockStyle}" Text="{helpers:ResourceString Name=AboutTextBlockFollowUs}" />
