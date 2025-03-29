@@ -48,8 +48,7 @@
                     </controls:SettingsExpander.Items>
                 </controls:SettingsExpander>
 
-                <!--  TODO: fill in Click  -->
-                <!--<HyperlinkButton Click="" NavigateUri="">Open log file</HyperlinkButton>-->
+                <!--  TODO: fill in Click or NavigateUri  -->
                 <controls:SettingsCard>
                     <controls:SettingsCard.Header>
                         <StackPanel Spacing="8">
