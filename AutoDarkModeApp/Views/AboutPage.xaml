@@ -26,7 +26,10 @@
 
                 <TextBlock Style="{StaticResource SettingsSectionHeaderTextBlockStyle}" Text="{helpers:ResourceString Name=NavbarAbout}" />
 
-                <controls:SettingsExpander Header="{helpers:ResourceString Name=AboutTextBlockVersion}" HeaderIcon="{ui:FontIcon Glyph=&#xe946;}">
+                <controls:SettingsExpander
+                    Header="{helpers:ResourceString Name=AboutTextBlockVersion}"
+                    HeaderIcon="{ui:FontIcon Glyph=&#xe946;}"
+                    IsExpanded="True">
                     <Button Content="{helpers:ResourceString Name=AboutButtonCopy}" />
                     <controls:SettingsExpander.Items>
                         <controls:SettingsCard>
@@ -45,20 +48,28 @@
                     </controls:SettingsExpander.Items>
                 </controls:SettingsExpander>
 
-                <!-- TODO: fill in Click -->
+                <!--  TODO: fill in Click  -->
                 <!--<HyperlinkButton Click="" NavigateUri="">Open log file</HyperlinkButton>-->
-                <HyperlinkButton>Open log file</HyperlinkButton>
-
-                <HyperlinkButton>Open updater log</HyperlinkButton>
-
-                <HyperlinkButton>Open Shell</HyperlinkButton>
+                <controls:SettingsCard>
+                    <controls:SettingsCard.Header>
+                        <StackPanel Spacing="8">
+                            <HyperlinkButton Content="{helpers:ResourceString Name=ConfigHyperLinkOpenLog}" />
+                            <HyperlinkButton Content="{helpers:ResourceString Name=AboutHyperLinkOpenUpdaterLog}" />
+                            <HyperlinkButton Content="{helpers:ResourceString Name=AboutHyperLinkOpenShell}" />
+                        </StackPanel>
+                    </controls:SettingsCard.Header>
+                </controls:SettingsCard>
 
 
                 <TextBlock Style="{StaticResource SettingsSectionHeaderTextBlockStyle}" Text="{helpers:ResourceString Name=SpecialThanks}" />
+                <controls:SettingsCard>
+                    <controls:SettingsCard.Header>
+                        <StackPanel Spacing="8">
+                            <HyperlinkButton NavigateUri="https://github.com/namazso" ToolTipService.ToolTip="https://github.com/namazso">namaszo</HyperlinkButton>
+                        </StackPanel>
+                    </controls:SettingsCard.Header>
+                </controls:SettingsCard>
 
-                <StackPanel Spacing="8">
-                    <HyperlinkButton NavigateUri="https://github.com/namazso" ToolTipService.ToolTip="https://github.com/namazso">namaszo</HyperlinkButton>
-                </StackPanel>
 
                 <TextBlock Style="{StaticResource SettingsSectionHeaderTextBlockStyle}" Text="{helpers:ResourceString Name=AboutTextBlockFollowUs}" />
                 <controls:SettingsCard>
@@ -81,7 +92,9 @@
                 <TextBlock Style="{StaticResource SettingsSectionHeaderTextBlockStyle}" Text="{helpers:ResourceString Name=lblThirdParty}" />
                 <controls:SettingsCard>
                     <controls:SettingsCard.Header>
-                        <HyperlinkButton Content="WinUI" />
+                        <StackPanel Spacing="8">
+                            <HyperlinkButton Content="WinUI" />
+                        </StackPanel>
                     </controls:SettingsCard.Header>
                 </controls:SettingsCard>
             </StackPanel>

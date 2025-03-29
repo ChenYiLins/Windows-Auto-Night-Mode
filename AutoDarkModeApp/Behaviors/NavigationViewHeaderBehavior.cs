@@ -73,7 +73,7 @@ public class NavigationViewHeaderBehavior : Behavior<NavigationView>
             _currentPage = page;
 
             UpdateHeader();
-            UpdateHeaderTemplate();
+            //UpdateHeaderTemplate();
         }
     }
 

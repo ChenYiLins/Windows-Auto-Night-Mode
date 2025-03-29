@@ -14,14 +14,20 @@
             <StackPanel Style="{StaticResource PageBaseStackPanelStyle}">
 
                 <TextBlock Style="{StaticResource SettingsSectionHeaderTextBlockStyle}" Text="{helpers:ResourceString Name=lblScripts}" />
-                <controls:SettingsCard Header="{helpers:ResourceString Name=PageScriptsToggle}">
+                <controls:SettingsExpander Header="{helpers:ResourceString Name=PageScriptsToggle}" IsExpanded="True">
                     <ToggleSwitch />
-                </controls:SettingsCard>
-                <HyperlinkButton MinWidth="120" Content="{helpers:ResourceString Name=PageScriptsButtonOpenConfig}" />
+                    <controls:SettingsExpander.Items>
+                        <controls:SettingsCard>
+                            <controls:SettingsCard.Header>
+                                <HyperlinkButton MinWidth="120" Content="{helpers:ResourceString Name=PageScriptsButtonOpenConfig}" />
+                            </controls:SettingsCard.Header>
+                        </controls:SettingsCard>
+                    </controls:SettingsExpander.Items>
+                </controls:SettingsExpander>
 
                 <TextBlock Style="{StaticResource SettingsSectionHeaderTextBlockStyle}" Text="{helpers:ResourceString Name=Links}" />
-                <HyperlinkButton NavigateUri="" Content="{helpers:ResourceString Name=PageScriptsCardDocumentationTextBlock}"></HyperlinkButton>
-                <HyperlinkButton NavigateUri="" Content="{helpers:ResourceString Name=PageScriptsCardUserRepositoryTextBlock}"></HyperlinkButton>
+                <HyperlinkButton Content="{helpers:ResourceString Name=PageScriptsCardDocumentationTextBlock}" NavigateUri="" />
+                <HyperlinkButton Content="{helpers:ResourceString Name=PageScriptsCardUserRepositoryTextBlock}" NavigateUri="" />
             </StackPanel>
         </Grid>
     </ScrollViewer>

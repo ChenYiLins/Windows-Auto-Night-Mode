@@ -34,6 +34,7 @@
                 Style="{StaticResource CaptionTextBlockStyle}"
                 TextWrapping="NoWrap" />
         </StackPanel>
+        
         <NavigationView
             IsTitleBarAutoPaddingEnabled="True"
             x:Name="NavigationViewControl"
@@ -91,20 +92,6 @@
                 </NavigationViewItem>
             </NavigationView.MenuItems>
 
-            <NavigationView.HeaderTemplate>
-                <DataTemplate>
-                    <TextBlock Style="{ThemeResource TitleTextBlockStyle}" Text="{Binding}" />
-                </DataTemplate>
-            </NavigationView.HeaderTemplate>
-            <i:Interaction.Behaviors>
-                <behaviors:NavigationViewHeaderBehavior DefaultHeader="{x:Bind ((ContentControl)ViewModel.Selected).Content, Mode=OneWay}">
-                    <behaviors:NavigationViewHeaderBehavior.DefaultHeaderTemplate>
-                        <DataTemplate>
-                            <TextBlock Style="{ThemeResource TitleTextBlockStyle}" Text="{Binding}" />
-                        </DataTemplate>
-                    </behaviors:NavigationViewHeaderBehavior.DefaultHeaderTemplate>
-                </behaviors:NavigationViewHeaderBehavior>
-            </i:Interaction.Behaviors>
             <Frame x:Name="NavigationFrame" ScrollViewer.VerticalScrollBarVisibility="Auto" />
         </NavigationView>
     </Grid>

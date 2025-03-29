@@ -15,6 +15,7 @@
 
                 <TextBlock Style="{StaticResource SettingsSectionHeaderTextBlockStyle}" Text="{helpers:ResourceString Name=PersonalizationPageManagedMode}" />
                 <controls:SettingsCard
+                    Click="PickWallpaperSettingsCard_Click"
                     Description="{helpers:ResourceString Name=tbPickWallpaper}"
                     Header="{helpers:ResourceString Name=lblPickWallpaper}"
                     HeaderIcon="{ui:FontIcon Glyph=&#xE91B;}"

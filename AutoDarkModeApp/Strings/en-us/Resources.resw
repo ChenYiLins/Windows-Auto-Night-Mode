@@ -657,7 +657,7 @@ Sidenote: NEVER run Auto Dark Mode as administrator manually!</value>
     <value>Enable wallpaper switch</value>
   </data>
     <data name="SwitchModesCheckBoxGPUMonitoring" xml:space="preserve">
-    <value>Don't switch while playing video games</value>
+    <value>Don't switch while playing games</value>
   </data>
     <data name="SwitchModesComboBoxItemSamplesFast" xml:space="preserve">
     <value>Fast (1 sample)</value>
@@ -804,7 +804,7 @@ Sidenote: NEVER run Auto Dark Mode as administrator manually!</value>
     <value>Color</value>
   </data>
     <data name="SwitchModesHotkeyEditHint" xml:space="preserve">
-    <value>You can only edit hotkeys while they are disabled.</value>
+    <value>Hotkeys can only be changed while disabled.</value>
   </data>
     <data name="SwitchModesTextBlockHeaderForceDark" xml:space="preserve">
     <value>Force dark mode</value>
