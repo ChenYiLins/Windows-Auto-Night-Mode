@@ -1,5 +1,7 @@
 ﻿using System.Diagnostics;
+using System.Text;
 using AutoDarkModeApp.Contracts.Services;
+using AutoDarkModeApp.Utils;
 using AutoDarkModeApp.ViewModels;
 using Microsoft.UI.Xaml.Controls;
 
@@ -17,6 +19,49 @@ public sealed partial class AboutPage : Page
     {
         ViewModel = App.GetService<AboutViewModel>();
         InitializeComponent();
+    }
+
+    private void CopyVersionInfoButoon_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    {
+        // most likely use case is to paste in an issue, so
+        // we create a markddown string that will look nice
+        // in that context
+        var versionInfo = new VersionInfo();
+        var versionText = new StringBuilder()
+                .Append("- Commit: `")
+                .Append(versionInfo.Commit)
+                .AppendLine("`")
+                .Append("- Service/App: `")
+                .Append(versionInfo.Svc)
+                .AppendLine("`")
+                .Append("- Updater: `")
+                .Append(versionInfo.Updater)
+                .AppendLine("`")
+                .Append("- Shell: `")
+                .Append(versionInfo.Shell)
+                .AppendLine("`")
+                .Append("- .Net: `")
+                .Append(versionInfo.NetCore)
+                .AppendLine("`")
+                .Append("- Windows: `")
+                .Append(versionInfo.WindowsVersion)
+                .AppendLine("`")
+                .Append("- Arch: `")
+                .Append(versionInfo.Arch)
+                .AppendLine("`")
+                .ToString();
+        try
+        {
+            var dataPackage = new Windows.ApplicationModel.DataTransfer.DataPackage();
+            dataPackage.SetText(versionText);
+            Windows.ApplicationModel.DataTransfer.Clipboard.SetContent(dataPackage);
+
+            CopyButtonTeachingTip.IsOpen = true;
+        }
+        catch (Exception ex)
+        {
+            errorService.ShowErrorMessage(ex, App.MainWindow.Content.XamlRoot, "AboutPage_CopyVersionInfoButton");
+        }
     }
 
     private void LogoImage_PointerPressed(object sender, Microsoft.UI.Xaml.Input.PointerRoutedEventArgs e)
@@ -54,7 +99,7 @@ public sealed partial class AboutPage : Page
                 }
             }.Start();
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             errorService.ShowErrorMessage(ex, App.MainWindow.Content.XamlRoot, "AboutPage");
         }
