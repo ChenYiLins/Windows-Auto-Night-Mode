@@ -85,6 +85,12 @@
                                         Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                         Glyph="&#xE946;" />
                                 </StackPanel>
+                                <RadioButton
+                                    Command="{x:Bind ViewModel.SetTriggerModeCommand}"
+                                    CommandParameter="PowerLight"
+                                    Content="{helpers:ResourceString Name=FollowEnergySavingMode}"
+                                    GroupName="TriggerMode"
+                                    IsChecked="{x:Bind ViewModel.SelectedTriggerMode, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=PowerLight, Mode=OneWay}" />
                             </StackPanel>
 
                             <Border Style="{StaticResource DividerBorderStyle}" />
