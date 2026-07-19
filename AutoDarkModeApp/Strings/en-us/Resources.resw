@@ -1126,6 +1126,9 @@ Please note: This may introduce slight to moderate lag on some systems during th
     <value>Contributors</value>
   </data>
   <data name="FollowEnergySavingMode" xml:space="preserve">
-    <value>Follow energy saving mode</value>
+    <value>Follow Energy Saver mode</value>
+  </data>
+    <data name="OpenWindowsPowerSleep" xml:space="preserve">
+    <value>Go to Power sleep settings</value>
   </data>
 </root>

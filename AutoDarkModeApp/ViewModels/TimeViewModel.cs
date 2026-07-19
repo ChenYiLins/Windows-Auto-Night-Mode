@@ -20,7 +20,7 @@ public partial class TimeViewModel : ObservableRecipient
         CoordinateTimes,
         WindowsNightLight,
         AmbientLight,
-        PowerLight
+        EnergySaver
     }
 
     [ObservableProperty]
@@ -555,7 +555,7 @@ public partial class TimeViewModel : ObservableRecipient
 
         if(_builder.Config.Governor == Governor.Power)
         {
-            SelectedTriggerMode = SwitchTriggerMode.PowerLight;
+            SelectedTriggerMode = SwitchTriggerMode.EnergySaver;
             TimePickerVisibility = Visibility.Collapsed;
             DividerBorderVisibility = Visibility.Collapsed;
             OffsetTimeSettingsCardVisibility = Visibility.Collapsed;
@@ -743,7 +743,7 @@ public partial class TimeViewModel : ObservableRecipient
                 OffsetTimeSettingsCardVisibility = Visibility.Collapsed;
                 break;
 
-            case SwitchTriggerMode.PowerLight:
+            case SwitchTriggerMode.EnergySaver:
                 _builder.Config.Governor = Governor.Power;
                 _builder.Config.AutoThemeSwitchingEnabled = true;
                 _builder.Config.Location.Enabled = false;
