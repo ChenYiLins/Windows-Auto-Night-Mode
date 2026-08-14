@@ -6,7 +6,7 @@
     xmlns:helpers="using:AutoDarkModeApp.Helpers"
     xmlns:local="using:AutoDarkModeApp"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:navigationService="using:AutoDarkModeApp.Services"
+    xmlns:models="using:AutoDarkModeApp.Models"
     xmlns:ui="using:CommunityToolkit.WinUI"
     mc:Ignorable="d">
     <Window.SystemBackdrop>
@@ -33,7 +33,6 @@
         <NavigationView
             x:Name="NavigationViewControl"
             Grid.Row="1"
-            CompactModeThresholdWidth="0"
             IsBackButtonVisible="Collapsed"
             IsPaneToggleButtonVisible="False"
             IsSettingsVisible="True"
@@ -42,11 +41,14 @@
             <NavigationView.Header>
                 <BreadcrumbBar x:Name="BreadcrumBarControl" MaxWidth="{StaticResource PageContentMaxWidth}">
                     <BreadcrumbBar.ItemTemplate>
-                        <DataTemplate x:DataType="navigationService:BreadcrumbItem">
+                        <DataTemplate x:DataType="models:BreadcrumbItem">
                             <BreadcrumbBarItem AutomationProperties.Name="{Binding Content}" Content="{Binding}">
                                 <BreadcrumbBarItem.ContentTemplate>
                                     <DataTemplate>
-                                        <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="{Binding Content}" />
+                                        <TextBlock
+                                            Padding="{Binding BreadcrumbBarTextBlockPadding}"
+                                            Style="{StaticResource TitleTextBlockStyle}"
+                                            Text="{Binding Content}" />
                                     </DataTemplate>
                                 </BreadcrumbBarItem.ContentTemplate>
                             </BreadcrumbBarItem>

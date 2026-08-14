@@ -19,7 +19,7 @@ public sealed partial class PersonalizationPage : Page
         {
             navigation.RegisterCustomBreadcrumbBarItem(
                 typeof(WallpaperPickerViewModel).FullName!,
-                new Services.BreadcrumbItem() { Content = "Background".GetLocalized(), Tag = "WallpaperPicker" }
+                new Models.BreadcrumbItem() { Content = "Background".GetLocalized(), Tag = "WallpaperPicker" }
             );
             navigation.NavigateTo(typeof(WallpaperPickerViewModel).FullName!);
         }
@@ -32,7 +32,7 @@ public sealed partial class PersonalizationPage : Page
         {
             navigation.RegisterCustomBreadcrumbBarItem(
                 typeof(ColorizationViewModel).FullName!,
-                new Services.BreadcrumbItem() { Content = "AccentColor".GetLocalized(), Tag = "Colorization" }
+                new Models.BreadcrumbItem() { Content = "AccentColor".GetLocalized(), Tag = "Colorization" }
             );
             navigation.NavigateTo(typeof(ColorizationViewModel).FullName!);
         }
@@ -45,7 +45,7 @@ public sealed partial class PersonalizationPage : Page
         {
             navigation.RegisterCustomBreadcrumbBarItem(
                 typeof(CursorsViewModel).FullName!,
-                new Services.BreadcrumbItem() { Content = "Cursors".GetLocalized(), Tag = "Cursors" }
+                new Models.BreadcrumbItem() { Content = "Cursors".GetLocalized(), Tag = "Cursors" }
             );
             navigation.NavigateTo(typeof(CursorsViewModel).FullName!);
         }
@@ -58,7 +58,7 @@ public sealed partial class PersonalizationPage : Page
         {
             navigation.RegisterCustomBreadcrumbBarItem(
                 typeof(ThemePickerViewModel).FullName!,
-                new Services.BreadcrumbItem() { Content = "Theme".GetLocalized(), Tag = "ThemePicker" }
+                new Models.BreadcrumbItem() { Content = "Theme".GetLocalized(), Tag = "ThemePicker" }
             );
             navigation.NavigateTo(typeof(ThemePickerViewModel).FullName!);
         }
