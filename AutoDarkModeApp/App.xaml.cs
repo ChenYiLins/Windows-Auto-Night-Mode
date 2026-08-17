@@ -56,7 +56,6 @@ public partial class App : Application
                 {
                     // Services
                     services.AddSingleton<ILocalSettingsService, LocalSettingsService>();
-                    services.AddSingleton<IFileService, FileService>();
 
                     services.AddSingleton<IActivationService, ActivationService>();
                     services.AddSingleton<ICloseService, CloseService>();
