@@ -15,7 +15,7 @@ public class ActivationService(ILocalSettingsService localSettingsService, INavi
         navigationService.NavigateTo(typeof(TimeViewModel).FullName!);
 
         // Move window to config position
-        await MoveWindowAsync();
+        MoveWindow();
 
         // Activate the MainWindow.
         App.MainWindow.Activate();
@@ -79,7 +79,7 @@ public class ActivationService(ILocalSettingsService localSettingsService, INavi
         if (!localSettingsService.GetValue<bool>("NotFirstRun"))
         {
             AutostartHandler.EnableAutoStart(App.MainWindow.Content.XamlRoot);
-            await SystemTimeFormatAsync();
+            SystemTimeFormat();
             await AddJumpListAsync();
             localSettingsService.SetValue("NotFirstRun", true);
         }
@@ -96,7 +96,7 @@ public class ActivationService(ILocalSettingsService localSettingsService, INavi
         }
     }
 
-    private async Task MoveWindowAsync()
+    private void MoveWindow()
     {
         var isMainWindowMaximized = localSettingsService.GetValue<bool>("IsMainWindowMaximized");
         var positionX = localSettingsService.GetValue<int>("MainWindowPositionX");
@@ -191,7 +191,7 @@ public class ActivationService(ILocalSettingsService localSettingsService, INavi
         }
     }
 
-    private async Task SystemTimeFormatAsync()
+    private void SystemTimeFormat()
     {
         string sysFormat = CultureInfo.CurrentCulture.DateTimeFormat.ShortTimePattern;
         sysFormat = sysFormat[..sysFormat.IndexOf(':')];
