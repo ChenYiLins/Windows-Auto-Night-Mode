@@ -11,6 +11,8 @@ public class ActivationService(ILocalSettingsService localSettingsService, INavi
 {
     public async Task ActivateAsync(object activationArgs)
     {
+        AdaptingToLegacyConfigHelper.MigrationSettings(localSettingsService);
+
         // Navigate to default page
         navigationService.NavigateTo(typeof(TimeViewModel).FullName!);
 
