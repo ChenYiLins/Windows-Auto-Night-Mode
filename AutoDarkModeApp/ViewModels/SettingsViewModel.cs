@@ -252,7 +252,7 @@ public partial class SettingsViewModel : ObservableRecipient
             UpdatesDate = "LastCheckedTime".GetLocalized() + " " + _builder.UpdaterData.LastCheck;
         }
 
-        SelectedLanguage = await LanguageHelper.GetDefaultLanguageAsync();
+        SelectedLanguage = LanguageHelper.GetDefaultLanguage();
 
         _isInitializing = false;
     }

@@ -20,7 +20,7 @@ public static class LanguageHelper
         "ar", "fa", "he"
     ];
 
-    public static async Task<string> GetDefaultLanguageAsync()
+    public static string GetDefaultLanguage()
     {
         var localSettings = App.GetService<ILocalSettingsService>();
         var savedLanguage = localSettings.GetValue<string>("SelectedLanguageCode");

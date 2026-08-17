@@ -24,7 +24,7 @@ public class GeolocatorService : IGeolocatorService
         _indexAdmin1.Build();
         _indexAdmin0.Build();
 
-        string language = Task.Run(LanguageHelper.GetDefaultLanguageAsync).Result;
+        string language = LanguageHelper.GetDefaultLanguage();
         _langcode = CultureInfo.GetCultureInfo(language).TwoLetterISOLanguageName.ToUpperInvariant();
     }
 
