@@ -25,13 +25,14 @@ GitHub may collect some personal data while communicating with its servers. Beca
 
 ### This App can access following user data:
 * Picture folder (for choosing a wallpaper that is saved locally)
-* File System (for choosing a windows Theme that is saved locally)
+* File System (for choosing a Windows Theme that is saved locally)
 * Location service (for calculating sun times)
 * Internet connection (for update checking)
 * Running processes (if the theme switch should be paused while certain apps are running)
+* Ambient light Sensor (if Ambient Light Sensor switching is enabled)
 * Accent colors
 
 ### Changes to our Privacy Statement
 Auto Dark Mode may change our Privacy Statement from time to time.
 
-_Last updated: 15.10.2025_
+_Last updated: 16.08.2026_

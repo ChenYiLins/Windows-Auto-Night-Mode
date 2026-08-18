@@ -73,8 +73,8 @@ fn main() -> anyhow::Result<()> {
     let asset_arch = detect_native_arch();
 
     let base =
-        "https://github.com/AutoDarkMode/Windows-Auto-Night-Mode/releases/download/11.1.0.23/";
-    let filename = format!("AutoDarkMode_11.1.0.23_{}.exe", asset_arch);
+        "https://github.com/AutoDarkMode/Windows-Auto-Night-Mode/releases/download/11.1.1.1/";
+    let filename = format!("AutoDarkMode_Setup_11.1.1.1_{}.exe", asset_arch);
     let url = format!("{}{}", base, filename);
 
     // prepare temp path early so we always attempt cleanup.

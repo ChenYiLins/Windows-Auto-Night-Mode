@@ -107,22 +107,35 @@ public partial class App : Application
     }
 
     /// <summary>
-    /// Passed to the new instance when the app restarts itself, followed by the process id of the
-    /// instance being replaced.
+    /// Passed to the new instance when the app restarts itself, so it knows to wait for the
+    /// outgoing instance to let go of the mutex instead of giving up after the usual short probe.
     /// </summary>
-    public const string RestartArgument = "--restarted-from";
+    public const string RestartArgument = "--restarted";
 
     public static void CheckAppMutex()
     {
-        // On a self-restart the outgoing instance is still alive and still holds the mutex. Without
-        // waiting for it, this instance would hand focus back to a process that is already exiting
-        // and then quit, leaving nothing running.
-        if (TryGetRestartPredecessorId(out var predecessorId))
+        // On a self-restart the outgoing instance is still alive and still holds the mutex for a
+        // moment. A 50 ms probe loses that race, so this instance would hand focus back to a
+        // process that is already exiting and then quit, leaving nothing running.
+        var restarting = Environment.GetCommandLineArgs().Contains(RestartArgument);
+        var timeout = restarting ? TimeSpan.FromSeconds(10) : TimeSpan.FromMilliseconds(50);
+
+        bool acquired;
+        try
         {
-            WaitForPredecessorExit(predecessorId);
+            acquired = Mutex.WaitOne(timeout, false);
+        }
+        catch (AbandonedMutexException)
+        {
+            // The previous instance exited without releasing the mutex, which is exactly what a
+            // restart looks like. The wait still succeeded and this process owns the mutex now, so
+            // startup has to continue. Letting this escape kills the successor before the app is
+            // even constructed, leaving the user with nothing running.
+            // AutoDarkModeSvc/Program.cs handles the identical case for the service.
+            acquired = true;
         }
 
-        if (Mutex.WaitOne(TimeSpan.FromMilliseconds(50), false) || Debugger.IsAttached)
+        if (acquired || Debugger.IsAttached)
         {
             return;
         }
@@ -132,37 +145,6 @@ public partial class App : Application
         {
             Helpers.WindowHelper.BringProcessToFront(processes[0]);
             App.Current.Exit();
-        }
-    }
-
-    private static bool TryGetRestartPredecessorId(out int processId)
-    {
-        processId = 0;
-        var arguments = Environment.GetCommandLineArgs();
-        for (var i = 1; i < arguments.Length - 1; i++)
-        {
-            if (arguments[i] == RestartArgument && int.TryParse(arguments[i + 1], out processId))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private static void WaitForPredecessorExit(int processId)
-    {
-        try
-        {
-            using var predecessor = Process.GetProcessById(processId);
-            predecessor.WaitForExit(10000);
-        }
-        catch (ArgumentException)
-        {
-            // already gone, nothing to wait for
-        }
-        catch (InvalidOperationException)
-        {
-            // already gone, nothing to wait for
         }
     }
 
