@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Globalization;
 using AutoDarkModeApp.Services;
+using Microsoft.Windows.AppLifecycle;
 
 namespace AutoDarkModeApp.ViewModels;
 
@@ -10,6 +11,7 @@ public partial class SettingsViewModel : ObservableRecipient
     private readonly AdmConfigBuilder _builder = AdmConfigBuilder.Instance();
     private readonly Microsoft.UI.Dispatching.DispatcherQueue _dispatcherQueue;
     private readonly Updater _updater;
+    private readonly ICloseService _closeService;
     private readonly ILocalSettingsService _localSettingsService;
     private readonly IErrorService _errorService;
     private bool _isInitializing;
@@ -97,25 +99,14 @@ public partial class SettingsViewModel : ObservableRecipient
     {
         try
         {
-            _builder.Save();
-
-            // Application.Exit() is not guaranteed to run the MainWindow.Closed handler to
-            // completion, so persist the window placement here rather than relying on it.
-            App.GetService<ICloseService>().Close();
+            _closeService.Close();
+            MessageHandler.Client.SendMessageAndGetReply(Command.Restart);
+            AppInstance.Restart(string.Format("{0} {1}", App.RestartArgument, Environment.ProcessId.ToString(CultureInfo.InvariantCulture)));
         }
         catch (Exception ex)
         {
             _errorService.ShowErrorMessage(ex, App.MainWindow.Content.XamlRoot, "SettingsViewModel");
         }
-
-        MessageHandler.Client.SendMessageAndGetReply(Command.Restart);
-        Process.Start(new ProcessStartInfo(Helper.ExecutionPathApp)
-        {
-            UseShellExecute = false,
-            Verb = "open",
-            ArgumentList = { App.RestartArgument, Environment.ProcessId.ToString(CultureInfo.InvariantCulture) },
-        });
-        Microsoft.UI.Xaml.Application.Current.Exit();
     }
 
     [RelayCommand]
@@ -153,10 +144,11 @@ public partial class SettingsViewModel : ObservableRecipient
         SetAutostartDetailsVisibility(true);
     }
 
-    public SettingsViewModel(ILocalSettingsService localSettingsService, IErrorService errorService)
+    public SettingsViewModel(ICloseService closeService,ILocalSettingsService localSettingsService, IErrorService errorService)
     {
         _dispatcherQueue = Microsoft.UI.Dispatching.DispatcherQueue.GetForCurrentThread();
         _updater = new();
+        _closeService = closeService;
         _localSettingsService = localSettingsService;
         _errorService = errorService;
 
@@ -208,7 +200,7 @@ public partial class SettingsViewModel : ObservableRecipient
         }
     }
 
-    private async void LoadSettings()
+    private void LoadSettings()
     {
         _isInitializing = true;
 
