@@ -95,17 +95,19 @@ public partial class SettingsViewModel : ObservableRecipient
     public partial Visibility GridAutostartVisibility { get; set; }
 
     [RelayCommand]
-    private void Restart()
+    private async Task Restart()
     {
         try
         {
             _closeService.Close();
             MessageHandler.Client.SendMessageAndGetReply(Command.Restart);
             AppInstance.Restart(string.Format("{0} {1}", App.RestartArgument, Environment.ProcessId.ToString(CultureInfo.InvariantCulture)));
+            return;
         }
         catch (Exception ex)
         {
-            _errorService.ShowErrorMessage(ex, App.MainWindow.Content.XamlRoot, "SettingsViewModel");
+            // Awaited, otherwise Exit() below races the dialog away before it can be read.
+            await _errorService.ShowErrorMessage(ex, App.MainWindow.Content.XamlRoot, "SettingsViewModel");
         }
     }
 
